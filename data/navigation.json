@@ -1,0 +1,81 @@
+{
+  "main": [
+    {
+      "text": "About BBPS",
+      "url": "https://bbpsnavimum.balbharati.org/about",
+      "children": [
+        {
+          "text": "About us",
+          "url": "https://bbpsnavimum.balbharati.org/about-us"
+        },
+        {
+          "text": "History of school",
+          "url": "https://bbpsnavimum.balbharati.org/history"
+        },
+        {
+          "text": "Mission",
+          "url": "https://bbpsnavimum.balbharati.org/mission"
+        },
+        {
+          "text": "Vision",
+          "url": "https://bbpsnavimum.balbharati.org/vision"
+        },
+        {
+          "text": "Management",
+          "url": "https://bbpsnavimum.balbharati.org/management"
+        }
+      ]
+    },
+    {
+      "text": "Academics",
+      "url": "https://bbpsnavimum.balbharati.org/academics",
+      "children": [
+        {
+          "text": "Curriculum",
+          "url": "https://bbpsnavimum.balbharati.org/curriculum"
+        },
+        {
+          "text": "Departments",
+          "url": "https://bbpsnavimum.balbharati.org/departments"
+        },
+        {
+          "text": "Achievements",
+          "url": "https://bbpsnavimum.balbharati.org/achievements"
+        }
+      ]
+    },
+    {
+      "text": "Admissions",
+      "url": "https://bbpsnavimum.balbharati.org/admissions",
+      "children": [
+        {
+          "text": "Procedure",
+          "url": "https://bbpsnavimum.balbharati.org/admission-procedure"
+        },
+        {
+          "text": "Fee Structure",
+          "url": "https://bbpsnavimum.balbharati.org/fee-structure"
+        }
+      ]
+    },
+    {
+      "text": "Contact",
+      "url": "https://bbpsnavimum.balbharati.org/contact",
+      "children": []
+    }
+  ],
+  "footer": [
+    {
+      "text": "Privacy Policy",
+      "url": "https://bbpsnavimum.balbharati.org/privacy-policy"
+    },
+    {
+      "text": "Terms of Use",
+      "url": "https://bbpsnavimum.balbharati.org/terms"
+    },
+    {
+      "text": "Site Map",
+      "url": "https://bbpsnavimum.balbharati.org/sitemap"
+    }
+  ]
+}

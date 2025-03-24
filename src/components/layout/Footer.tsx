@@ -4,6 +4,7 @@ import {
   Facebook,
   Twitter,
   Instagram,
+  Linkedin,
   Mail,
   Phone,
   MapPin,
@@ -12,221 +13,129 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
-interface FooterProps {
-  schoolName?: string;
-  address?: string;
-  phone?: string;
-  email?: string;
-  socialLinks?: {
-    facebook?: string;
-    twitter?: string;
-    instagram?: string;
-  };
-}
-
-const Footer = ({
-  schoolName = "Bal Bharati Public School, Navi Mumbai",
-  address = "Sector 4, Kharghar, Navi Mumbai, Maharashtra 410210",
-  phone = "022-27743824",
-  email = "bbpsnavimumbai@balbharati.org",
-  socialLinks = {
-    facebook: "https://www.facebook.com/bbpsnavimumbai",
-    twitter: "https://twitter.com/bbpsnavimumbai",
-    instagram: "https://www.instagram.com/bbpsnavimumbai",
-  },
-}: FooterProps) => {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-900 text-white py-12 px-4 md:px-8 w-full">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* School Information */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">{schoolName}</h3>
-            <div className="flex items-start space-x-2">
-              <MapPin className="h-5 w-5 mt-0.5 text-slate-400" />
-              <span>{address}</span>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Bal Bharati Public School</h3>
+            <div className="mb-4">
+              <img src="https://placehold.co/200x80/ffffff/0a2463?text=BBPS" alt="School Logo" className="h-16 w-auto" />
             </div>
-            <div className="flex items-center space-x-2">
-              <Phone className="h-5 w-5 text-slate-400" />
-              <span>{phone}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="h-5 w-5 text-slate-400" />
-              <span>{email}</span>
-            </div>
-            <div className="flex space-x-4 pt-2">
-              <a
-                href={socialLinks.facebook}
-                aria-label="Facebook"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
+            <p className="text-gray-400 mb-4">
+              Empowering minds, inspiring futures. Excellence in education since establishment.
+            </p>
+            <div className="flex space-x-4">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a
-                href={socialLinks.twitter}
-                aria-label="Twitter"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a
-                href={socialLinks.instagram}
-                aria-label="Instagram"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <Linkedin className="h-5 w-5" />
               </a>
             </div>
           </div>
-
+          
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">Quick Links</h3>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link
-                  to="/about/school"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
+                <Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link>
               </li>
               <li>
-                <Link
-                  to="/academics/curriculum"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Academics
-                </Link>
+                <Link to="/admission-info" className="text-gray-400 hover:text-white transition-colors">Admissions</Link>
               </li>
               <li>
-                <Link
-                  to="/admissions/process"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Admissions
-                </Link>
+                <Link to="/academics" className="text-gray-400 hover:text-white transition-colors">Academics</Link>
               </li>
               <li>
-                <Link
-                  to="/student-life/activities"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Student Life
-                </Link>
+                <Link to="/facilities" className="text-gray-400 hover:text-white transition-colors">Facilities</Link>
               </li>
               <li>
-                <Link
-                  to="/news"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  News & Events
-                </Link>
+                <Link to="/events" className="text-gray-400 hover:text-white transition-colors">Events</Link>
               </li>
               <li>
-                <Link
-                  to="/contact"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Contact Us
-                </Link>
+                <Link to="/gallery" className="text-gray-400 hover:text-white transition-colors">Gallery</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact Us</Link>
               </li>
             </ul>
           </div>
-
-          {/* Resources */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">Resources</h3>
+          
+          {/* Important Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Important Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link
-                  to="/academics/calendar"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  School Calendar
-                </Link>
+                <Link to="/fee-payment" className="text-gray-400 hover:text-white transition-colors">Fee Payment</Link>
               </li>
               <li>
-                <Link
-                  to="/about/faculty"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Faculty & Staff
-                </Link>
+                <Link to="/results" className="text-gray-400 hover:text-white transition-colors">Results</Link>
               </li>
               <li>
-                <Link
-                  to="/parents"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Parent Resources
-                </Link>
+                <Link to="/alumni" className="text-gray-400 hover:text-white transition-colors">Alumni</Link>
               </li>
               <li>
-                <Link
-                  to="/students"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Student Resources
-                </Link>
+                <Link to="/careers" className="text-gray-400 hover:text-white transition-colors">Careers</Link>
               </li>
               <li>
-                <Link
-                  to="/alumni"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Alumni
-                </Link>
+                <Link to="/downloads" className="text-gray-400 hover:text-white transition-colors">Downloads</Link>
               </li>
               <li>
-                <Link
-                  to="/facilities/infrastructure"
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  Facilities
-                </Link>
+                <a href="https://cbse.gov.in/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">CBSE</a>
               </li>
             </ul>
           </div>
-
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold">Stay Connected</h3>
-            <p className="text-slate-400">
-              Subscribe to our newsletter for updates on school events and news.
-            </p>
-            <div className="flex flex-col space-y-2">
-              <Input
-                type="email"
-                placeholder="Your email address"
-                className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
-              />
-              <Button className="w-full">Subscribe</Button>
-            </div>
+          
+          {/* Contact Information */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 text-gray-400 mr-3 flex-shrink-0 mt-0.5" />
+                <span className="text-gray-400">
+                  Sector 4, Kharghar, Navi Mumbai - 410210, Maharashtra, India
+                </span>
+              </li>
+              <li className="flex items-center">
+                <Phone className="h-5 w-5 text-gray-400 mr-3 flex-shrink-0" />
+                <a href="tel:+912227741641" className="text-gray-400 hover:text-white transition-colors">
+                  +91 (022) 27741641, 27742773
+                </a>
+              </li>
+              <li className="flex items-center">
+                <Mail className="h-5 w-5 text-gray-400 mr-3 flex-shrink-0" />
+                <a href="mailto:bbpskhrnm@yahoo.com" className="text-gray-400 hover:text-white transition-colors">
+                  bbpskhrnm@yahoo.com
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-
-        <Separator className="my-8 bg-slate-700" />
-
-        <div className="flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
-          <div>
-            <p>
-              &copy; {new Date().getFullYear()} {schoolName}. All rights
-              reserved.
-            </p>
-          </div>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="hover:text-white transition-colors">
+        
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400 text-sm">
+            &copy; {new Date().getFullYear()} Bal Bharati Public School, Navi Mumbai. All rights reserved.
+          </p>
+          <div className="mt-4 md:mt-0 flex space-x-6">
+            <Link to="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="hover:text-white transition-colors">
-              Terms of Use
+            <Link to="/terms-of-service" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Terms of Service
             </Link>
-            <Link
-              to="/accessibility"
-              className="hover:text-white transition-colors"
-            >
-              Accessibility
+            <Link to="/site-map" className="text-gray-400 hover:text-white text-sm transition-colors">
+              Site Map
             </Link>
           </div>
         </div>
