@@ -104,7 +104,7 @@ const alumniData = [
   },
 ];
 
-const AlumniNearYou = () => {
+export const AlumniNearYou = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
   const [distanceFilter, setDistanceFilter] = useState("all");
@@ -162,4 +162,132 @@ const AlumniNearYou = () => {
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="w-full md:w-48">
                   <Input
-                    placeholder
+                    placeholder="Location"
+                    value={locationFilter}
+                    onChange={(e) => setLocationFilter(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+                <div className="w-full md:w-48">
+                  <select
+                    value={distanceFilter}
+                    onChange={(e) => setDistanceFilter(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                  >
+                    <option value="all">Any Distance</option>
+                    <option value="0-5">0-5 km</option>
+                    <option value="5-10">5-10 km</option>
+                    <option value="10-20">10-20 km</option>
+                    <option value="20+">20+ km</option>
+                  </select>
+                </div>
+                <div className="w-full md:w-48">
+                  <select
+                    value={batchFilter}
+                    onChange={(e) => setBatchFilter(e.target.value)}
+                    className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                  >
+                    <option value="">Any Batch</option>
+                    {uniqueBatches.map(batch => (
+                      <option key={batch} value={batch}>{batch}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <p className="text-sm text-gray-500">
+                {filteredAlumni.length} alumni found
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => setShowMap(!showMap)}
+                className="flex items-center gap-2"
+              >
+                <MapPin className="h-4 w-4" />
+                {showMap ? "List View" : "Map View"}
+              </Button>
+            </div>
+          </div>
+
+          {showMap ? (
+            <div className="bg-white rounded-lg shadow-sm p-6 h-[600px] flex items-center justify-center">
+              <div className="text-center">
+                <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-medium mb-2">Map View Coming Soon</h3>
+                <p className="text-gray-500 max-w-md mx-auto">
+                  We're working on an interactive map to help you locate alumni more easily.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredAlumni.length > 0 ? (
+                filteredAlumni.map((alumni) => (
+                  <Card key={alumni.id} className="overflow-hidden hover:shadow-md transition-shadow">
+                    <CardContent className="p-0">
+                      <div className="flex items-start p-6">
+                        <div className="flex-shrink-0 mr-4">
+                          <div className="w-20 h-20 rounded-full overflow-hidden">
+                            <img
+                              src={alumni.image}
+                              alt={alumni.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold mb-1">{alumni.name}</h3>
+                          <div className="flex items-center text-gray-500 text-sm mb-1">
+                            <GraduationCap className="h-3 w-3 mr-1" />
+                            <span>Batch of {alumni.batch}</span>
+                          </div>
+                          <div className="flex items-center text-gray-500 text-sm mb-1">
+                            <Briefcase className="h-3 w-3 mr-1" />
+                            <span>{alumni.profession}</span>
+                          </div>
+                          <div className="flex items-center text-gray-500 text-sm mb-1">
+                            <Users className="h-3 w-3 mr-1" />
+                            <span>{alumni.company}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="border-t px-6 py-4">
+                        <div className="flex items-center text-sm text-gray-500 mb-2">
+                          <MapPin className="h-3 w-3 mr-2" />
+                          <span>{alumni.location}</span>
+                          <span className="ml-auto font-medium text-blue-600">{alumni.distance} km</span>
+                        </div>
+
+                        <div className="flex justify-between mt-4">
+                          <Button variant="outline" size="sm" className="flex items-center gap-1">
+                            <Mail className="h-3 w-3" />
+                            Email
+                          </Button>
+                          <Button variant="outline" size="sm" className="flex items-center gap-1">
+                            <Phone className="h-3 w-3" />
+                            Call
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-12">
+                  <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-lg font-medium mb-2">No Alumni Found</h3>
+                  <p className="text-gray-500 max-w-md mx-auto">
+                    Try adjusting your filters to find alumni in your area.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};

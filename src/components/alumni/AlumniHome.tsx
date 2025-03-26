@@ -13,6 +13,10 @@ import {
   MessageSquare,
   Image,
   Heart,
+  FileCheck,
+  Award,
+  ArrowRight,
+  ExternalLink,
 } from "lucide-react";
 
 const AlumniHome = () => {
@@ -80,126 +84,147 @@ const AlumniHome = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-blue-600 text-white py-20">
+      <section className="relative bg-gradient-to-br from-blue-800 to-indigo-900 text-white py-24 sm:py-32 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-600 opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-indigo-900/90"></div>
           <img
             src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80"
             alt="School building"
             className="w-full h-full object-cover"
+            style={{ filter: "brightness(0.8)" }}
           />
+          
+          {/* Decorative circles */}
+          <div className="absolute top-1/4 left-0 w-72 h-72 rounded-full bg-blue-500 opacity-10 blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-indigo-500 opacity-10 blur-3xl"></div>
         </div>
+        
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Welcome Back, Alumni
+            <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-100 text-sm font-medium mb-6 backdrop-blur-sm">BBPS Alumni Network</span>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Welcome Home, <span className="text-blue-300">Alumnus</span>
             </h1>
-            <p className="text-xl mb-8">
+            <p className="text-xl mb-10 text-blue-100 max-w-2xl">
               Reconnect with your alma mater, fellow graduates, and be part of
-              our growing community.
+              our thriving global community. Your journey continues here.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100"
-              >
-                Register Now
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white/10"
-              >
-                Explore Benefits
-              </Button>
+              <Link to="/alumni/register">
+                <Button
+                  size="lg"
+                  className="bg-white text-blue-700 hover:bg-blue-50 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                >
+                  Register Now
+                </Button>
+              </Link>
+              <Link to="/alumni/membership">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white/10 font-medium bg-transparent"
+                >
+                  Explore Benefits
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Quick Links */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link
-              to="/alumni/register"
-              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
-            >
-              <Users className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-              <h3 className="font-semibold">Register</h3>
-            </Link>
-            <Link
-              to="/alumni/meetings"
-              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
-            >
-              <Calendar className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-              <h3 className="font-semibold">Book Meetings</h3>
-            </Link>
-            <Link
-              to="/alumni/tours"
-              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
-            >
-              <MapPin className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-              <h3 className="font-semibold">School Tours</h3>
-            </Link>
-            <Link
-              to="/alumni/donate"
-              className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
-            >
-              <Gift className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-              <h3 className="font-semibold">Donate</h3>
-            </Link>
+      <section className="py-16 bg-gray-50 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full opacity-30 -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-blue-100 to-indigo-100 rounded-full opacity-30 translate-y-1/3 -translate-x-1/4"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-800">Alumni Services & Resources</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              { to: "/alumni/register", icon: <Users />, title: "Register" },
+              { to: "/alumni/book-meeting", icon: <Calendar />, title: "Book Meetings" },
+              { to: "/alumni/school-tour", icon: <MapPin />, title: "School Tours" },
+              { to: "/alumni/near-you", icon: <Users />, title: "Alumni Near You" },
+              { to: "/alumni/merchandise", icon: <ShoppingBag />, title: "Merchandise" },
+              { to: "/alumni/give-back", icon: <Gift />, title: "Give Back" },
+              { to: "/alumni/digital-id", icon: <FileCheck />, title: "Digital ID" },
+              { to: "/alumni/membership", icon: <Award />, title: "Membership" },
+            ].map((link, index) => (
+              <Link
+                key={index}
+                to={link.to}
+                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-xl transition-all transform hover:-translate-y-1 text-center group border border-gray-100"
+              >
+                <div className="mx-auto mb-4 w-14 h-14 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  {React.cloneElement(link.icon, { className: "h-6 w-6" })}
+                </div>
+                <h3 className="font-semibold text-gray-800">{link.title}</h3>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Featured Alumni */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white relative">
+        {/* Decorative wave */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gray-50">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="absolute -bottom-1 w-full h-16">
+            <path fill="#fff" fillOpacity="1" d="M0,64L80,58.7C160,53,320,43,480,64C640,85,800,139,960,149.3C1120,160,1280,128,1360,112L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+          </svg>
+        </div>
+        
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Featured Alumni
-          </h2>
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4 md:mb-0">
+              Our Distinguished Alumni
+            </h2>
+            <Button variant="outline" className="group">
+              View All Alumni
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredAlumni.map((alumni) => (
               <Card
                 key={alumni.id}
-                className="overflow-hidden hover:shadow-lg transition-shadow"
+                className="overflow-hidden hover:shadow-xl transition-all border-0 ring-1 ring-gray-200 rounded-xl group"
               >
-                <div className="aspect-square relative">
+                <div className="aspect-square relative overflow-hidden">
                   <img
                     src={alumni.image}
                     alt={alumni.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <Button variant="outline" size="sm" className="text-white border-white hover:bg-white/20">
+                      View Profile
+                    </Button>
+                  </div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-1">{alumni.name}</h3>
-                  <p className="text-sm text-gray-500 mb-2">
-                    Batch of {alumni.batch}
-                  </p>
-                  <p className="text-blue-600 font-medium mb-2">
-                    {alumni.profession}
-                  </p>
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800 mb-1">{alumni.name}</h3>
+                      <p className="text-sm text-gray-500 mb-1">Batch of {alumni.batch}</p>
+                    </div>
+                  </div>
+                  <p className="text-blue-600 font-medium mb-2">{alumni.profession}</p>
                   <p className="text-gray-600 text-sm">{alumni.achievement}</p>
                   <Link
                     to={`/alumni/profile/${alumni.id}`}
-                    className="mt-4 inline-block text-blue-600 hover:underline"
+                    className="mt-4 inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium"
                   >
-                    View Profile →
+                    View Full Profile
+                    <ExternalLink className="h-3.5 w-3.5" />
                   </Link>
                 </CardContent>
               </Card>
             ))}
-          </div>
-          <div className="text-center mt-10">
-            <Button
-              variant="outline"
-              className="border-blue-600 text-blue-600 hover:bg-blue-50"
-            >
-              View All Alumni
-            </Button>
           </div>
         </div>
       </section>
@@ -208,39 +233,48 @@ const AlumniHome = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <Tabs defaultValue="events" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8">
-              <TabsTrigger value="events">Events</TabsTrigger>
-              <TabsTrigger value="jobs">Job Board</TabsTrigger>
-              <TabsTrigger value="stories">Alumni Stories</TabsTrigger>
-              <TabsTrigger value="gallery">Gallery</TabsTrigger>
-              <TabsTrigger value="forums">Forums</TabsTrigger>
+            <TabsList className="w-full max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-5 mb-10 p-1 bg-gray-100 rounded-full">
+              <TabsTrigger value="events" className="rounded-full">Events</TabsTrigger>
+              <TabsTrigger value="jobs" className="rounded-full">Job Board</TabsTrigger>
+              <TabsTrigger value="stories" className="rounded-full">Alumni Stories</TabsTrigger>
+              <TabsTrigger value="gallery" className="rounded-full">Gallery</TabsTrigger>
+              <TabsTrigger value="forums" className="rounded-full">Forums</TabsTrigger>
             </TabsList>
 
             <TabsContent
               value="events"
-              className="bg-white p-6 rounded-lg shadow-sm"
+              className="bg-white p-6 sm:p-8 rounded-xl shadow-sm"
             >
-              <h3 className="text-2xl font-bold mb-6">Upcoming Events</h3>
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-800">Upcoming Events</h3>
+                <Button variant="outline" size="sm">
+                  View Calendar
+                </Button>
+              </div>
+              
               <div className="space-y-6">
                 {upcomingEvents.map((event) => (
                   <div key={event.id} className="border-b pb-6 last:border-0">
                     <div className="flex items-start gap-4">
-                      <div className="bg-blue-100 text-blue-600 p-3 rounded-lg">
+                      <div className="bg-blue-100 text-blue-600 p-4 rounded-lg flex-shrink-0">
                         <Calendar className="h-6 w-6" />
                       </div>
-                      <div>
-                        <h4 className="text-xl font-semibold mb-1">
+                      <div className="flex-grow">
+                        <h4 className="text-xl font-semibold mb-1 text-gray-800">
                           {event.title}
                         </h4>
-                        <p className="text-gray-600 mb-1">
-                          {event.date} • {event.location}
-                        </p>
-                        <p className="text-gray-600">{event.description}</p>
+                        <div className="flex flex-col sm:flex-row sm:items-center text-gray-600 mb-2">
+                          <span className="font-medium">{event.date}</span>
+                          <span className="hidden sm:block mx-2">•</span>
+                          <span>{event.location}</span>
+                        </div>
+                        <p className="text-gray-600 mb-3">{event.description}</p>
                         <Button
                           variant="link"
-                          className="p-0 h-auto mt-2 text-blue-600"
+                          className="p-0 h-auto text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
                         >
-                          Register for this event →
+                          Register for this event
+                          <ArrowRight className="h-3.5 w-3.5" />
                         </Button>
                       </div>
                     </div>
@@ -248,405 +282,299 @@ const AlumniHome = () => {
                 ))}
               </div>
               <div className="text-center mt-8">
-                <Link to="/alumni/events">
-                  <Button>View All Events</Button>
-                </Link>
+                <Button variant="outline" className="md:hidden">
+                  View All Events
+                </Button>
               </div>
             </TabsContent>
-
-            <TabsContent
-              value="jobs"
-              className="bg-white p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-6">Job Opportunities</h3>
-              <div className="grid gap-6">
-                <div className="border rounded-lg p-6">
-                  <div className="flex justify-between items-start">
+            
+            <TabsContent value="jobs" className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-800">Alumni Job Board</h3>
+                <Button variant="outline" size="sm">
+                  Post a Job
+                </Button>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="border rounded-xl p-6 hover:shadow-md transition-all">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <div>
-                      <h4 className="text-xl font-semibold mb-1">
-                        Senior Software Engineer
-                      </h4>
-                      <p className="text-blue-600 mb-1">TechCorp India</p>
-                      <p className="text-gray-600 mb-3">
-                        Mumbai, Maharashtra • ₹25-35 LPA
-                      </p>
-                      <p className="text-gray-600">
-                        Looking for experienced software engineers with
-                        expertise in React, Node.js, and cloud technologies.
-                      </p>
+                      <h4 className="text-xl font-semibold text-gray-800 mb-1">Senior Software Engineer</h4>
+                      <p className="text-gray-600">Tech Solutions Inc.</p>
                     </div>
-                    <Briefcase className="h-6 w-6 text-gray-400" />
+                    <div className="mt-2 md:mt-0">
+                      <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        Full Time
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-4 flex gap-2">
-                    <Button size="sm">Apply Now</Button>
-                    <Button size="sm" variant="outline">
-                      Save
+                  <div className="flex flex-wrap gap-4 text-gray-600 mb-4">
+                    <span className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      Bangalore, India
+                    </span>
+                    <span className="flex items-center">
+                      <Briefcase className="h-4 w-4 mr-1" />
+                      5+ years experience
+                    </span>
+                    <span className="flex items-center">
+                      <Calendar className="h-4 w-4 mr-1" />
+                      Posted 2 days ago
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-4">
+                    Looking for an experienced software engineer to join our team. Must have strong experience with React, Node.js, and cloud technologies.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <Button variant="outline" size="sm" className="text-blue-600 border-blue-200 hover:bg-blue-50">
+                      View Details
                     </Button>
+                    <span className="text-sm text-gray-500">Posted by: Rahul Mehta (Class of 2015)</span>
                   </div>
                 </div>
 
-                <div className="border rounded-lg p-6">
-                  <div className="flex justify-between items-start">
+                <div className="border rounded-xl p-6 hover:shadow-md transition-all">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <div>
-                      <h4 className="text-xl font-semibold mb-1">
-                        Marketing Manager
-                      </h4>
-                      <p className="text-blue-600 mb-1">Global Brands Ltd</p>
-                      <p className="text-gray-600 mb-3">
-                        Pune, Maharashtra • ₹18-22 LPA
-                      </p>
-                      <p className="text-gray-600">
-                        Seeking a creative marketing professional to lead our
-                        digital marketing initiatives.
-                      </p>
+                      <h4 className="text-xl font-semibold text-gray-800 mb-1">Marketing Manager</h4>
+                      <p className="text-gray-600">Global Brands Co.</p>
                     </div>
-                    <Briefcase className="h-6 w-6 text-gray-400" />
+                    <div className="mt-2 md:mt-0">
+                      <span className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                        Remote
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-4 flex gap-2">
-                    <Button size="sm">Apply Now</Button>
-                    <Button size="sm" variant="outline">
-                      Save
+                  <div className="flex flex-wrap gap-4 text-gray-600 mb-4">
+                    <span className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-1" />
+                      Remote
+                    </span>
+                    <span className="flex items-center">
+                      <Briefcase className="h-4 w-4 mr-1" />
+                      3+ years experience
+                    </span>
+                    <span className="flex items-center">
+                      <Calendar className="h-4 w-4 mr-1" />
+                      Posted 5 days ago
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-4">
+                    Seeking a creative marketing manager to lead our digital marketing initiatives. Experience in social media and content strategy required.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <Button variant="outline" size="sm" className="text-blue-600 border-blue-200 hover:bg-blue-50">
+                      View Details
                     </Button>
+                    <span className="text-sm text-gray-500">Posted by: Priya Sharma (Class of 2018)</span>
                   </div>
                 </div>
               </div>
-              <div className="text-center mt-8">
-                <Link to="/alumni/jobs">
-                  <Button>View All Jobs</Button>
-                </Link>
-              </div>
             </TabsContent>
-
-            <TabsContent
-              value="stories"
-              className="bg-white p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-6">
-                Alumni Success Stories
-              </h3>
-              <div className="space-y-8">
-                <div className="flex flex-col md:flex-row gap-6">
+            
+            <TabsContent value="stories" className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-800">Alumni Stories</h3>
+                <Button variant="outline" size="sm">
+                  Share Your Story
+                </Button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="border rounded-xl overflow-hidden hover:shadow-md transition-all">
                   <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=alumni5"
-                    alt="Anil Kapoor"
-                    className="w-24 h-24 rounded-full object-cover"
+                    src="https://placehold.co/600x300/e2e8f0/1e293b?text=Alumni+Story+1"
+                    alt="Alumni story"
+                    className="w-full h-48 object-cover"
                   />
-                  <div>
-                    <h4 className="text-xl font-semibold mb-1">
-                      From BBPS to Silicon Valley
-                    </h4>
-                    <p className="text-blue-600 mb-3">
-                      Anil Kapoor, Batch of 2000
+                  <div className="p-6">
+                    <div className="flex items-center mb-3">
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=story1"
+                        alt="Author"
+                        className="w-10 h-10 rounded-full mr-3"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Dr. Amit Patel</h4>
+                        <p className="text-sm text-gray-500">Class of 2005</p>
+                      </div>
+                    </div>
+                    <h5 className="text-xl font-semibold mb-2 text-gray-800">From BBPS to Medical Excellence</h5>
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      My journey from BBPS to becoming a leading cardiologist has been shaped by the values and discipline instilled in me during my school years. The science labs and dedicated teachers prepared me well for my medical career.
                     </p>
-                    <p className="text-gray-600">
-                      "My journey from BBPS Navi Mumbai to becoming a Product
-                      Manager at Google was shaped by the strong foundation I
-                      received at school. The emphasis on both academics and
-                      extracurricular activities helped me develop a
-                      well-rounded personality that has been crucial to my
-                      success."
-                    </p>
-                    <Button
-                      variant="link"
-                      className="p-0 h-auto mt-2 text-blue-600"
-                    >
-                      Read full story →
+                    <Button variant="link" className="p-0 h-auto text-blue-600 hover:text-blue-700">
+                      Read Full Story
                     </Button>
                   </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-6">
+                <div className="border rounded-xl overflow-hidden hover:shadow-md transition-all">
                   <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=alumni6"
-                    alt="Meera Patel"
-                    className="w-24 h-24 rounded-full object-cover"
+                    src="https://placehold.co/600x300/e2e8f0/1e293b?text=Alumni+Story+2"
+                    alt="Alumni story"
+                    className="w-full h-48 object-cover"
                   />
-                  <div>
-                    <h4 className="text-xl font-semibold mb-1">
-                      Making a Difference in Healthcare
-                    </h4>
-                    <p className="text-blue-600 mb-3">
-                      Meera Patel, Batch of 1995
+                  <div className="p-6">
+                    <div className="flex items-center mb-3">
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=story2"
+                        alt="Author"
+                        className="w-10 h-10 rounded-full mr-3"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Neha Gupta</h4>
+                        <p className="text-sm text-gray-500">Class of 2012</p>
+                      </div>
+                    </div>
+                    <h5 className="text-xl font-semibold mb-2 text-gray-800">Building a Tech Empire</h5>
+                    <p className="text-gray-600 mb-4 line-clamp-3">
+                      The entrepreneurial spirit I developed during my time at BBPS, especially during business club activities, helped me establish my own tech startup. Today, we're a team of 50+ employees serving clients globally.
                     </p>
-                    <p className="text-gray-600">
-                      "The values of compassion and service that I learned at
-                      BBPS guided me through medical school and beyond. Today,
-                      as the head of a rural healthcare initiative, I'm able to
-                      bring quality medical care to underserved communities."
-                    </p>
-                    <Button
-                      variant="link"
-                      className="p-0 h-auto mt-2 text-blue-600"
-                    >
-                      Read full story →
+                    <Button variant="link" className="p-0 h-auto text-blue-600 hover:text-blue-700">
+                      Read Full Story
                     </Button>
                   </div>
                 </div>
               </div>
-              <div className="text-center mt-8">
-                <Link to="/alumni/stories">
-                  <Button>More Success Stories</Button>
-                </Link>
+            </TabsContent>
+            
+            <TabsContent value="gallery" className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-800">Alumni Gallery</h3>
+                <Button variant="outline" size="sm">
+                  Upload Photos
+                </Button>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+                  <div key={index} className="aspect-square relative group overflow-hidden rounded-xl">
+                    <img
+                      src={`https://placehold.co/400x400/e2e8f0/1e293b?text=Gallery+${index}`}
+                      alt={`Gallery image ${index}`}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <Button variant="outline" size="sm" className="bg-white/90 hover:bg-white">
+                        View Details
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-8 text-center">
+                <Button variant="outline" className="gap-2">
+                  View More Photos
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
               </div>
             </TabsContent>
-
-            <TabsContent
-              value="gallery"
-              className="bg-white p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-6">Photo Gallery</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <img
-                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80"
-                  alt="Alumni Meet 2022"
-                  className="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=500&q=80"
-                  alt="Graduation Day"
-                  className="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&q=80"
-                  alt="Campus Tour"
-                  className="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500&q=80"
-                  alt="Reunion Event"
-                  className="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
-                />
+            
+            <TabsContent value="forums" className="bg-white p-8 rounded-xl shadow-sm">
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="text-2xl font-bold text-gray-800">Alumni Forums</h3>
+                <Button variant="outline" size="sm">
+                  Start Discussion
+                </Button>
               </div>
-              <div className="text-center mt-8">
-                <Link to="/alumni/gallery">
-                  <Button>View Full Gallery</Button>
-                </Link>
-              </div>
-            </TabsContent>
-
-            <TabsContent
-              value="forums"
-              className="bg-white p-6 rounded-lg shadow-sm"
-            >
-              <h3 className="text-2xl font-bold mb-6">Discussion Forums</h3>
-              <div className="space-y-4">
-                <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
-                  <div className="flex justify-between">
-                    <h4 className="font-semibold">Career Networking</h4>
-                    <span className="text-sm text-gray-500">124 topics</span>
+              
+              <div className="space-y-6">
+                <div className="border rounded-xl p-6 hover:shadow-md transition-all">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=forum1"
+                        alt="Author"
+                        className="w-10 h-10 rounded-full mr-3"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Rajesh Kumar</h4>
+                        <p className="text-sm text-gray-500">Class of 2010</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-500">2 hours ago</span>
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Connect with fellow alumni for career opportunities and
-                    professional networking.
+                  <h5 className="text-xl font-semibold mb-2 text-gray-800">Upcoming Alumni Meet 2024</h5>
+                  <p className="text-gray-600 mb-4">
+                    Let's discuss ideas for the upcoming alumni meet. I suggest we organize it in a way that includes both networking sessions and fun activities. What are your thoughts?
                   </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <Button variant="ghost" size="sm" className="text-gray-600">
+                        <MessageSquare className="h-4 w-4 mr-1" />
+                        12 Replies
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-gray-600">
+                        <Heart className="h-4 w-4 mr-1" />
+                        24 Likes
+                      </Button>
+                    </div>
+                    <Button variant="outline" size="sm" className="text-blue-600 border-blue-200 hover:bg-blue-50">
+                      Join Discussion
+                    </Button>
+                  </div>
                 </div>
 
-                <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
-                  <div className="flex justify-between">
-                    <h4 className="font-semibold">School Memories</h4>
-                    <span className="text-sm text-gray-500">87 topics</span>
+                <div className="border rounded-xl p-6 hover:shadow-md transition-all">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center">
+                      <img
+                        src="https://api.dicebear.com/7.x/avataaars/svg?seed=forum2"
+                        alt="Author"
+                        className="w-10 h-10 rounded-full mr-3"
+                      />
+                      <div>
+                        <h4 className="font-semibold text-gray-800">Anjali Sharma</h4>
+                        <p className="text-sm text-gray-500">Class of 2015</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-500">5 hours ago</span>
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Share your favorite memories and reconnect with old
-                    classmates.
+                  <h5 className="text-xl font-semibold mb-2 text-gray-800">Career Mentorship Program</h5>
+                  <p className="text-gray-600 mb-4">
+                    I'm looking to start a mentorship program for current students. Would any alumni be interested in volunteering their time to mentor students in their respective fields?
                   </p>
-                </div>
-
-                <div className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
-                  <div className="flex justify-between">
-                    <h4 className="font-semibold">Mentorship Program</h4>
-                    <span className="text-sm text-gray-500">56 topics</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <Button variant="ghost" size="sm" className="text-gray-600">
+                        <MessageSquare className="h-4 w-4 mr-1" />
+                        8 Replies
+                      </Button>
+                      <Button variant="ghost" size="sm" className="text-gray-600">
+                        <Heart className="h-4 w-4 mr-1" />
+                        15 Likes
+                      </Button>
+                    </div>
+                    <Button variant="outline" size="sm" className="text-blue-600 border-blue-200 hover:bg-blue-50">
+                      Join Discussion
+                    </Button>
                   </div>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Discussions about mentoring current students and recent
-                    graduates.
-                  </p>
                 </div>
-              </div>
-              <div className="text-center mt-8">
-                <Link to="/alumni/forums">
-                  <Button>Join Discussions</Button>
-                </Link>
               </div>
             </TabsContent>
           </Tabs>
         </div>
       </section>
-
-      {/* Additional Features */}
-      <section className="py-16 bg-white">
+      
+      {/* Newsletter Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-700 to-indigo-800 text-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Alumni Resources
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="bg-blue-100 p-3 rounded-full mb-4">
-                  <ShoppingBag className="h-6 w-6 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">
-                  Alumni Merchandise
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  Show your school pride with our exclusive collection of BBPS
-                  branded merchandise.
-                </p>
-                <Link to="/alumni/merchandise">
-                  <Button variant="outline">Shop Now</Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="bg-blue-100 p-3 rounded-full mb-4">
-                  <Users className="h-6 w-6 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Alumni Near You</h3>
-                <p className="text-gray-600 mb-4">
-                  Discover fellow BBPS alumni in your area and connect for local
-                  meetups.
-                </p>
-                <Link to="/alumni/near-you">
-                  <Button variant="outline">Find Alumni</Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-md transition-shadow">
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <div className="bg-blue-100 p-3 rounded-full mb-4">
-                  <Heart className="h-6 w-6 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Give Back</h3>
-                <p className="text-gray-600 mb-4">
-                  Support your alma mater through donations, scholarships, or
-                  volunteering opportunities.
-                </p>
-                <Link to="/alumni/give-back">
-                  <Button variant="outline">Learn More</Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Digital ID and Membership */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6">
-                Get Your Digital Alumni ID
-              </h2>
-              <p className="text-xl mb-6">
-                Access exclusive benefits with your personalized digital alumni
-                ID card. Use it for campus visits, special events, and
-                alumni-only offers.
-              </p>
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100"
-              >
-                Generate Your ID
-              </Button>
-            </div>
-            <div className="bg-white/10 p-8 rounded-lg backdrop-blur-sm">
-              <h3 className="text-2xl font-bold mb-4">Membership Benefits</h3>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-3">
-                  <div className="bg-white/20 p-1 rounded-full">
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span>Access to exclusive alumni events</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="bg-white/20 p-1 rounded-full">
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span>Networking opportunities with industry leaders</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="bg-white/20 p-1 rounded-full">
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span>School library and facility access</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="bg-white/20 p-1 rounded-full">
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span>Discounts on school merchandise</span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="bg-white/20 p-1 rounded-full">
-                    <svg
-                      className="h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span>Priority registration for alumni events</span>
-                </li>
-              </ul>
-              <div className="mt-6">
-                <Link to="/alumni/membership">
-                  <Button
-                    variant="outline"
-                    className="border-white text-white hover:bg-white/10"
-                  >
-                    View Membership Options
-                  </Button>
-                </Link>
-              </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Stay Connected</h2>
+            <p className="text-blue-100 mb-8">
+              Subscribe to our alumni newsletter to receive updates about events, 
+              opportunities, and school developments.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="Your email address"
+                className="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-800"
+              />
+              <Button className="bg-white text-blue-700 hover:bg-blue-50">Subscribe</Button>
             </div>
           </div>
         </div>

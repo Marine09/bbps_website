@@ -38,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({
               Admissions
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-primary-700">
+            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 font-medium bg-transparent">
               Virtual Tour
             </Button>
           </div>

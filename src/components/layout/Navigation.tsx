@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -59,6 +59,20 @@ const navigationItems = [
       { title: 'Student Council', href: '/student-council' },
     ],
   },
+  {
+    title: 'Alumni',
+    submenu: [
+      { title: 'Alumni Home', href: '/alumni' },
+      { title: 'Register', href: '/alumni/register' },
+      { title: 'Alumni Near You', href: '/alumni/near-you' },
+      { title: 'Book Meeting', href: '/alumni/book-meeting' },
+      { title: 'School Tour', href: '/alumni/school-tour' },
+      { title: 'Merchandise', href: '/alumni/merchandise' },
+      { title: 'Give Back', href: '/alumni/give-back' },
+      { title: 'Digital ID', href: '/alumni/digital-id' },
+      { title: 'Membership', href: '/alumni/membership' },
+    ],
+  },
   { title: 'Contact', href: '/contact' },
 ];
 
@@ -68,6 +82,16 @@ interface SubmenuProps {
 }
 
 const Submenu: React.FC<SubmenuProps> = ({ items, isOpen }) => {
+  const location = useLocation();
+  
+  // Helper function to check if a link is active
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(href);
+  };
+  
   if (!isOpen) return null;
   
   return (
@@ -77,7 +101,10 @@ const Submenu: React.FC<SubmenuProps> = ({ items, isOpen }) => {
           <Link
             key={item.title}
             to={item.href}
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            className={cn(
+              "block px-4 py-2 text-sm hover:bg-gray-100",
+              isActive(item.href) ? "text-primary-600 font-medium" : "text-gray-700"
+            )}
             role="menuitem"
           >
             {item.title}
@@ -96,6 +123,15 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose }) => {
   const [openSubmenuIndex, setOpenSubmenuIndex] = useState<number | null>(null);
+  const location = useLocation();
+  
+  // Helper function to check if a link is active
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(href);
+  };
 
   if (!isOpen) return null;
 
@@ -113,7 +149,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose }) => {
             {item.submenu ? (
               <>
                 <button
-                  className="flex justify-between items-center w-full text-left py-2 font-medium"
+                  className={cn(
+                    "flex justify-between items-center w-full text-left py-2 font-medium",
+                    item.submenu.some(subItem => isActive(subItem.href)) && "text-primary-600"
+                  )}
                   onClick={() => setOpenSubmenuIndex(openSubmenuIndex === index ? null : index)}
                 >
                   {item.title}
@@ -129,7 +168,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose }) => {
                       <Link
                         key={subItem.title}
                         to={subItem.href}
-                        className="block py-2 text-gray-600"
+                        className={cn(
+                          "block py-2",
+                          isActive(subItem.href) ? "text-primary-600 font-medium" : "text-gray-600"
+                        )}
                         onClick={onClose}
                       >
                         {subItem.title}
@@ -141,7 +183,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose }) => {
             ) : (
               <Link
                 to={item.href || '/'}
-                className="block py-2 font-medium"
+                className={cn(
+                  "block py-2 font-medium",
+                  isActive(item.href || '/') ? "text-primary-600" : "text-gray-800"
+                )}
                 onClick={onClose}
               >
                 {item.title}
@@ -157,6 +202,57 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ items, isOpen, onClose }) => {
 export const Navigation: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  
+  // Helper function to check if a link is active
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(href);
+  };
+  
+  // Helper function to check if any submenu item is active
+  const hasActiveSubmenu = (submenu: { title: string; href: string }[]) => {
+    return submenu.some(item => isActive(item.href));
+  };
+
+  const handleMenuItemMouseEnter = (index: number) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setOpenIndex(index);
+  };
+
+  const handleMenuItemMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenIndex(null);
+    }, 150); // Small delay to allow moving to submenu
+  };
+
+  const handleSubmenuMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
+  const handleSubmenuMouseLeave = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setOpenIndex(null);
+    }, 150);
+  };
+
+  // Clean up timeouts when component unmounts
+  React.useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
@@ -178,21 +274,38 @@ export const Navigation: React.FC = () => {
               <div
                 key={item.title}
                 className="relative"
-                onMouseEnter={() => setOpenIndex(index)}
-                onMouseLeave={() => setOpenIndex(null)}
+                onMouseEnter={() => handleMenuItemMouseEnter(index)}
+                onMouseLeave={handleMenuItemMouseLeave}
               >
                 {item.submenu ? (
                   <>
-                    <button className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-800 border-b-2 border-transparent hover:border-primary-500 hover:text-primary-600 transition duration-150 ease-in-out">
+                    <button className={cn(
+                      "inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition duration-150 ease-in-out",
+                      hasActiveSubmenu(item.submenu) 
+                        ? "border-primary-500 text-primary-600" 
+                        : "border-transparent text-gray-800 hover:border-primary-500 hover:text-primary-600"
+                    )}>
                       {item.title}
                       <ChevronDown className="ml-1 h-4 w-4" />
                     </button>
-                    <Submenu items={item.submenu} isOpen={openIndex === index} />
+                    {openIndex === index && (
+                      <div 
+                        onMouseEnter={handleSubmenuMouseEnter}
+                        onMouseLeave={handleSubmenuMouseLeave}
+                      >
+                        <Submenu items={item.submenu} isOpen={true} />
+                      </div>
+                    )}
                   </>
                 ) : (
                   <Link
                     to={item.href || '/'}
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-800 border-b-2 border-transparent hover:border-primary-500 hover:text-primary-600 transition duration-150 ease-in-out"
+                    className={cn(
+                      "inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 transition duration-150 ease-in-out",
+                      isActive(item.href || '/') 
+                        ? "border-primary-500 text-primary-600" 
+                        : "border-transparent text-gray-800 hover:border-primary-500 hover:text-primary-600"
+                    )}
                   >
                     {item.title}
                   </Link>
